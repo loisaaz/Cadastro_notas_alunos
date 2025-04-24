@@ -38,29 +38,54 @@ for i in range(num_alunos):
 
     mt = (0.4 * T1) + (0.6 * T2)
     mp = (P1 + P2) / 2
-    mf = (0.3 * mp) + (0.7 * mt)
+    if mt > 5 and mp > 5:
+        mf = (0.3 * mp) + (0.7 * mt)
+    elif mt < mp:
+        mf = mt
+    else:
+        mf = mp
+
     print('\n---------------------------------------------------------------------------------------------')
-    cadastro_alunos.append([f"'{nome}', 'Média teórica: {mt:.2f}', 'Média prática: {mp:.2f}', 'Média final: {mf:.2f}'"])
+    cadastro_alunos.append([
+        f"[{nome}], NOTAS TEÓRICAS: [{T1}], {T2}], NOTAS PRÁTICAS: [{P1}, {P2}] MÉDIA TEÓRICA E PRÁTICA: [{mt:.2f}, {mp:.2f}], MÉDIA FINAL: [{mf:.2f}]"])
     print(f"\nCADASTRO DO(A) ALUNO(A) {nome} CONCLUÍDO COM SUCESSO!")
     print('\n---------------------------------------------------------------------------------------------')
-for aluno in cadastro_alunos:
-    print(aluno) 
-    print('\n---------------------------------------------------------------------------------------------')
 
-print("\nPROGRAMA DE CADASTRO E CÁLCULO DE NOTAS")
-print('\n<<< MENU >>>')
-menu = int(input('\nCONSULTAR ALUNO(A) = 1 | CONSULTAR ALUNO COM MAIOR MÉDIA FINAL = 2 \nCONSULTAR ALUNO COM MENOR MÉDIA FINAL = 3 | PERCENTUAL DE ALUNOS COM MÉDIA FINAL SUPERIOR A 5 = 4 \nDIGITE SUA ESCOLHA:')) 
-if menu == 1:
-    nome_consulta = input('\nDIGITE O NOME DO ALUNO: ')
-#    for aluno in cadastro_alunos: 
-#        if algo == nome_consulta: 
-#            print(f"\nINFORMAÇÕES DO(A) ALUNO(A) {aluno[0]}:")
-#            print(aluno) 
-#        else:
-#            print("\nALUNO NÃO CADASTRADO NO SISTEMA.")
-#elif menu == 2:
+menu = 0
+while menu != 6:
+    print("\n<< MENU >>")
+    print('\n')
+    print("1. Consultar boletim dos alunos")
+    print("2. Consultar um aluno")    
+    print("3. Nome do aluno com maior Média Final (MF)")
+    print("4. Nome do aluno com menor Média Final (MF)")
+    print("5. Percentual de alunos com Média Final (MF) acima de 5")
+    print("6. Sair")
 
-    
+    menu = int(input("\nDigite sua escolha: "))
+    if menu == 1:
+        print("\nBOLETIM DOS ALUNOS:")
+        for aluno in cadastro_alunos:
+            print('\n')
+            print(aluno)
+
+
+        # o menu 2 não está funcionando
+
+
+
+    elif menu == 2:
+        pesquisa_aluno = input('\nNome do(a) aluno(a): ')
+        for aluno in cadastro_alunos:
+            if aluno[0] == pesquisa_aluno:
+                print(aluno)
+                break
+        else:
+            print("Aluno(a) não encontrado no sistema.")
+    elif menu == 3:
+
+        
+
 # O nome do aluno com maior Média Final (MF)
 # O nome do aluno com menor Média Final (MF)
 # Percentual dos alunos com Média Final (MF) superior a 5.0
