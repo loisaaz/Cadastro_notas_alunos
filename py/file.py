@@ -25,7 +25,7 @@ for i in range(num_alunos):
 
     T2 = float(input("\nDIGITE A NOTA DA PROVA TEÓRICA (T2): "))
     while T2 < 0 or T2 > 10:
-        print("\nTNOTA INVÁLIDA!! DIGITE UM NÚMERO ENTRE 0 E 10.")
+        print("\nNOTA INVÁLIDA!! DIGITE UM NÚMERO ENTRE 0 E 10.")
         T2 = float(input("\nDIGITE A NOTA DA PROVA TEÓRICA (T2): "))
 
     TEORIA.append(T1)
@@ -64,7 +64,6 @@ for i in range(num_alunos):
     cadastro_alunos.append(MEDIATEORICA)
     cadastro_alunos.append(MEDIAPRATICA)
     cadastro_alunos.append(MEDIAFINAL)
-#    cadastro_alunos.append(aluno)
     print(f"\nCADASTRO DO(A) ALUNO(A) {nome} CONCLUÍDO COM SUCESSO!")
     print('\n---------------------------------------------------------------------------------------------')
 
@@ -84,29 +83,50 @@ while menu != 6:
 
     if menu == 1:
         print("\nBOLETIM DOS ALUNOS:")
-        for aluno in cadastro_alunos:
+        for i in range(0, len(cadastro_alunos), 6):
+            nome = cadastro_alunos[i]
+            TEORIA = cadastro_alunos[i+1]
+            PRATICA = cadastro_alunos[i+2]
+            mt = cadastro_alunos[i+3][0]
+            mp = cadastro_alunos[i+4][0]
+            mf = cadastro_alunos[i+5][0]
             print('\n')
-            print(aluno)
-            # for i in range(0, len(cadastro_alunos), 6): \ if cadastro_alunos[i] == nome_aluno:
+            print(f"[{nome}], NOTAS TEÓRICAS: [{TEORIA[0]}, {TEORIA[1]}], NOTAS PRÁTICAS: [{PRATICA[0]}, {PRATICA[1]}] MÉDIA TEÓRICA E PRÁTICA: [{mt:.2f}, {mp:.2f}], MÉDIA FINAL: [{mf:.2f}]") 
     elif menu == 2:
-        nome_aluno = input('\nNome do(a) aluno(a): ')
-        for aluno in cadastro_alunos:
-            cadastro_alunos == nome_aluno
-            print('\nINFORMAÇÕES DO ALUNO PESQUISADO')
-            print('\n')
-            print(aluno)
-            break
+        nome_aluno = input('\nDigite o nome do aluno: ')
+        for i in range(0, len(cadastro_alunos), 6):
+            if cadastro_alunos[i].lower() == nome_aluno.lower():
+                print('\nINFORMAÇÕES DO ALUNO:')
+                print(f"NOME: {cadastro_alunos[i]}, NOTAS TEÓRICAS: [{cadastro_alunos[i+1][0]}, {cadastro_alunos[i+1][1]}], NOTAS PRÁTICAS: [{cadastro_alunos[i+2][0]}, {cadastro_alunos[i+2][1]}] MÉDIA TEÓRICA E PRÁTICA: [{cadastro_alunos[i+3][0]:.2f}, {cadastro_alunos[i+4][0]:.2f}], MÉDIA FINAL: [{cadastro_alunos[i+5][0]:.2f}]")
+                break
         else:
             print("Aluno(a) não encontrado no sistema.")
     elif menu == 3:
         maior_mf = 0
-        for aluno in cadastro_alunos:
-           # mf = aluno[-1] # ultimo elemento  
-            if mf > maior_mf:  
+        aluno_maiormf = ''
+        for i in range(0, len(cadastro_alunos), 6):
+            mf = cadastro_alunos[i+5][0]  # Acessa a Média Final do aluno
+            if mf > maior_mf:
                 maior_mf = mf
-                aluno_maiormf = aluno[0] 
-                print(f"Aluno com maior média final: {aluno_maiormf}, Média Final: {maior_mf}")
-
-# O nome do aluno com maior Média Final (MF)
-# O nome do aluno com menor Média Final (MF)
-# Percentual dos alunos com Média Final (MF) superior a 
+                aluno_maiormf = cadastro_alunos[i]  # Armazena o nome do aluno
+        print(f"\nAluno com maior média final: {aluno_maiormf}, MF: {maior_mf:.2f}")
+    elif menu == 4:
+        menor_mf = 10
+        aluno_menormf = ''
+        for i in range(0, len(cadastro_alunos), 6):
+            mf = cadastro_alunos[i+5][0]  # Acessa a Média Final do aluno
+            if mf < menor_mf:
+                menor_mf = mf
+                aluno_menormf = cadastro_alunos[i]
+                    #aluno_menormf = cadastro_alunos[i]  # Armazena o nome do aluno
+        print(f"\nAluno com menor média final: {aluno_menormf}, MF: {menor_mf:.2f}")
+    elif menu == 5:
+            maior_5 = 0
+            for i in range(5, len(cadastro_alunos), 6):  # Percorre as médias finais
+                if cadastro_alunos[i][0] > 5:
+                    maior_5 += 1
+                    percentual = (maior_5 / num_alunos) * 100 
+            print(f"\nPercentual de alunos com Média Final abaixo de 5: {percentual}")
+    elif menu == 6:
+        print('Encerrando...')
+        break
