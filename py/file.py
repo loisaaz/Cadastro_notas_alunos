@@ -68,7 +68,6 @@ for i in range(num_alunos):
     print('\n---------------------------------------------------------------------------------------------')
 
 menu = 0
-
 while menu != 6:
     print("\n<< MENU >>")
     print('\n')
@@ -105,28 +104,27 @@ while menu != 6:
         maior_mf = 0
         aluno_maiormf = ''
         for i in range(0, len(cadastro_alunos), 6):
-            mf = cadastro_alunos[i+5][0]  # Acessa a Média Final do aluno
+            mf = cadastro_alunos[i+5][0]  
             if mf > maior_mf:
                 maior_mf = mf
-                aluno_maiormf = cadastro_alunos[i]  # Armazena o nome do aluno
+                aluno_maiormf = cadastro_alunos[i]
         print(f"\nAluno com maior média final: {aluno_maiormf}, MF: {maior_mf:.2f}")
     elif menu == 4:
         menor_mf = 10
         aluno_menormf = ''
         for i in range(0, len(cadastro_alunos), 6):
-            mf = cadastro_alunos[i+5][0]  # Acessa a Média Final do aluno
+            mf = cadastro_alunos[i+5][0]  
             if mf < menor_mf:
                 menor_mf = mf
                 aluno_menormf = cadastro_alunos[i]
-                    #aluno_menormf = cadastro_alunos[i]  # Armazena o nome do aluno
         print(f"\nAluno com menor média final: {aluno_menormf}, MF: {menor_mf:.2f}")
     elif menu == 5:
             maior_5 = 0
-            for i in range(5, len(cadastro_alunos), 6):  # Percorre as médias finais
+            for i in range(5, len(cadastro_alunos), 6):  
                 if cadastro_alunos[i][0] > 5:
                     maior_5 += 1
                     percentual = (maior_5 / num_alunos) * 100 
-            print(f"\nPercentual de alunos com Média Final abaixo de 5: {percentual}")
+            print(f"\nPercentual de alunos com Média Final abaixo de 5: {percentual:.2f}%")
     elif menu == 6:
         print('Encerrando...')
         break
