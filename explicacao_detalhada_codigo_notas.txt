@@ -1,0 +1,175 @@
+
+================ EXPLICAÇÃO DETALHADA LINHA A LINHA DO CÓDIGO =================
+
+# Introdução do programa 
+
+print("\nPROGRAMA DE CADASTRO E CÁLCULO DE NOTAS")
+print("\nBEM VINDO AO SISTEMA DE CADASTRO DAS NOTAS DOS ALUNOS")
+print("\n A PARTIR DESSE PROGRAMA VOCÊ PODERÁ:")
+print("- Cadastrar nomes e notas de alunos")
+print("- Calcular as médias teóricas, práticas e a final.")
+print("- Consultar alunos com maior/menor média.")
+print("- Obter o percentual de alunos com média final acima de 5.")
+print("\n<<<Tecle algo para iniciar o programa>>>")
+input()
+
+
+# Criação da estrutura que armazenará os dados dos alunos
+cadastro_alunos = []
+# Cria uma lista chamada 'cadastro_alunos'. Esta lista vai guardar todos os dados de todos os alunos.
+# A cada novo aluno, serão adicionados 6 elementos seguidos: nome, notas teóricas, notas práticas, média teórica, média prática, média final.
+
+num_alunos = int(input("QUANTIDADE DE ALUNOS A CADASTRAR:"))
+# Pergunta ao usuário quantos alunos deseja cadastrar. 
+
+# Loop de cadastro de alunos
+for i in range(num_alunos):
+    aluno = []
+
+    print(f"\nCADASTRO DO(A) ALUNO {i + 1}")
+    # Indica ao usuário qual número de aluno está sendo cadastrado.
+
+    nome = input("\nDIGITE O NOME DO ALUNO:")
+    # Solicita o nome do aluno. Será usado como identificador textual.
+
+    TEORIA = []
+    # Lista que armazenará as duas notas teóricas (T1 e T2).
+
+    T1 = float(input("\nDIGITE A NOTA DA PROVA TEÓRICA (T1): "))
+    while T1 < 0 or T1 > 10:
+        print("\nNOTA INVÁLIDA!! DIGITE UM NÚMERO ENTRE 0 E 10.")
+        T1 = float(input("\nDIGITE A NOTA DA PROVA TEÓRICA (T1): "))
+    # Solicita a nota T1 e garante que ela esteja no intervalo de 0 a 10.
+
+    T2 = float(input("\nDIGITE A NOTA DA PROVA TEÓRICA (T2): "))
+    while T2 < 0 or T2 > 10:
+        print("\nNOTA INVÁLIDA!! DIGITE UM NÚMERO ENTRE 0 E 10.")
+        T2 = float(input("\nDIGITE A NOTA DA PROVA TEÓRICA (T2): "))
+    # Mesma lógica para T2: valida a entrada antes de prosseguir.
+
+    TEORIA.append(T1)
+    TEORIA.append(T2)
+    # Registra as notas teóricas na lista.
+
+    PRATICA = []
+    # Lista que armazenará as duas notas práticas (P1 e P2).
+
+    P1 = float(input("\nDIGITE A NOTA DE PROJETO (P1): "))
+    while P1 < 0 or P1 > 10:
+        print("\nNOTA INVÁLIDA!! DIGITE UM NÚMERO ENTRE 0 E 10.")
+        P1 = float(input("\nDIGITE A NOTA DE PROJETO (P1): "))
+
+    P2 = float(input("\nDIGITE A NOTA DE PROJETO (P2): "))
+    while P2 < 0 or P2 > 10:
+        print("\nNOTA INVÁLIDA!! DIGITE UM NÚMERO ENTRE 0 E 10.")
+        P2 = float(input("DIGITE A NOTA DE PROJETO (P2): "))
+    # Solicita e valida as notas práticas da mesma forma.
+
+    PRATICA.append(P1)
+    PRATICA.append(P2)
+    # Registra as notas na lista PRATICA.
+
+    # Cálculo da média teórica 
+    mt = (0.4 * T1) + (0.6 * T2)
+
+    # Cálculo da média prática 
+    mp = (P1 + P2) / 2
+
+    # Cálculo da média final com base em regras condicionais
+    if mt > 5 and mp > 5:
+        mf = (0.3 * mp) + (0.7 * mt)
+    elif mt < mp:
+        mf = mt
+    else:
+        mf = mp
+    # Regra:
+    # Se as duas médias forem maiores que 5, aplica pesos (70% teoria, 30% prática).
+    # Caso contrário, prevalece a menor média (mais exigente).
+
+    MEDIATEORICA = [mt]
+    MEDIAPRATICA = [mp]
+    MEDIAFINAL = [mf]
+    # Cada média é armazenada dentro de uma lista, mantendo a estrutura de 6 elementos por aluno.
+
+    print('\n---------------------------------------------------------------------------------------------')
+    cadastro_alunos.append(nome)
+    cadastro_alunos.append(TEORIA)
+    cadastro_alunos.append(PRATICA)
+    cadastro_alunos.append(MEDIATEORICA)
+    cadastro_alunos.append(MEDIAPRATICA)
+    cadastro_alunos.append(MEDIAFINAL)
+    # Adiciona todos os dados do aluno na lista principal.
+
+    print(f"\nCADASTRO DO(A) ALUNO(A) {nome} CONCLUÍDO COM SUCESSO!")
+    print('\n---------------------------------------------------------------------------------------------')
+
+# Menu principal do programa
+menu = 0
+while menu != 6:
+    # Menu que exibe opções até que o usuário escolha sair (6).
+    print("\n<< MENU >>")
+    print('\n')
+    print("1. Consultar boletim dos alunos")
+    print("2. Consultar um aluno")
+    print("3. Nome do aluno com maior Média Final (MF)")
+    print("4. Nome do aluno com menor Média Final (MF)")
+    print("5. Percentual de alunos com Média Final (MF) acima de 5")
+    print("6. Sair")
+
+    menu = int(input("\nDigite sua escolha: "))
+    # Lê a escolha do usuário.
+
+    if menu == 1:
+        # Exibe o boletim de todos os alunos cadastrados
+        print("\nBOLETIM DOS ALUNOS:")
+        for i in range(0, len(cadastro_alunos), 6):
+            nome = cadastro_alunos[i]
+            TEORIA = cadastro_alunos[i+1]
+            PRATICA = cadastro_alunos[i+2] -------> posição em cadastro_alunos: [2] 
+            mt = cadastro_alunos[i+3][0]
+            mp = cadastro_alunos[i+4][0]
+            mf = cadastro_alunos[i+5][0]
+            print('\n')
+            print(f"[{nome}], NOTAS TEÓRICAS: [{TEORIA[0]}, {TEORIA[1]}], NOTAS PRÁTICAS: [{PRATICA[0]}, {PRATICA[1]}] MÉDIA TEÓRICA E PRÁTICA: [{mt:.2f}, {mp:.2f}], MÉDIA FINAL: [{mf:.2f}]")
+
+    elif menu == 2:
+        nome_aluno = input('\nDigite o nome do aluno: ')
+        for i in range(0, len(cadastro_alunos), 6):
+            if cadastro_alunos[i].lower() == nome_aluno.lower():
+                print('\nINFORMAÇÕES DO ALUNO:')
+                print(f"NOME: {cadastro_alunos[i]}, NOTAS TEÓRICAS: [{cadastro_alunos[i+1][0]}, {cadastro_alunos[i+1][1]}], NOTAS PRÁTICAS: [{cadastro_alunos[i+2][0]}, {cadastro_alunos[i+2][1]}] MÉDIA TEÓRICA E PRÁTICA: [{cadastro_alunos[i+3][0]:.2f}, {cadastro_alunos[i+4][0]:.2f}], MÉDIA FINAL: [{cadastro_alunos[i+5][0]:.2f}]")
+                break
+        else:
+            print("Aluno(a) não encontrado no sistema.")
+
+    elif menu == 3:
+        maior_mf = 0
+        aluno_maiormf = ''
+        for i in range(0, len(cadastro_alunos), 6):
+            mf = cadastro_alunos[i+5][0]
+            if mf > maior_mf:
+                maior_mf = mf
+                aluno_maiormf = cadastro_alunos[i]
+        print(f"\nAluno com maior média final: {aluno_maiormf}, MF: {maior_mf:.2f}")
+
+    elif menu == 4:
+        menor_mf = 10
+        aluno_menormf = ''
+        for i in range(0, len(cadastro_alunos), 6):
+            mf = cadastro_alunos[i+5][0]
+            if mf < menor_mf:
+                menor_mf = mf
+                aluno_menormf = cadastro_alunos[i]
+        print(f"\nAluno com menor média final: {aluno_menormf}, MF: {menor_mf:.2f}")
+
+    elif menu == 5:
+        maior_5 = 0
+        for i in range(5, len(cadastro_alunos), 6):
+            if cadastro_alunos[i][0] > 5:
+                maior_5 += 1
+        percentual = (maior_5 / num_alunos) * 100
+        print(f"\nPercentual de alunos com Média Final acima de 5: {percentual:.2f}%")
+
+    elif menu == 6:
+        print('Encerrando...')
+        break
