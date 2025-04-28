@@ -92,10 +92,10 @@ while menu != 6:
             print('\n')
             print(f"[{nome}], NOTAS TEÓRICAS: [{TEORIA[0]}, {TEORIA[1]}], NOTAS PRÁTICAS: [{PRATICA[0]}, {PRATICA[1]}] MÉDIA TEÓRICA E PRÁTICA: [{mt:.2f}, {mp:.2f}], MÉDIA FINAL: [{mf:.2f}]") 
     elif menu == 2:
-        nome_aluno = input('\nDigite o nome do aluno: ')
+        nome_aluno = input('\nDigite o nome do aluno(a): ')
         for i in range(0, len(cadastro_alunos), 6):
             if cadastro_alunos[i].lower() == nome_aluno.lower():
-                print('\nINFORMAÇÕES DO ALUNO:')
+                print('\nINFORMAÇÕES DO ALUNO(A):')
                 print(f"NOME: {cadastro_alunos[i]}, NOTAS TEÓRICAS: [{cadastro_alunos[i+1][0]}, {cadastro_alunos[i+1][1]}], NOTAS PRÁTICAS: [{cadastro_alunos[i+2][0]}, {cadastro_alunos[i+2][1]}] MÉDIA TEÓRICA E PRÁTICA: [{cadastro_alunos[i+3][0]:.2f}, {cadastro_alunos[i+4][0]:.2f}], MÉDIA FINAL: [{cadastro_alunos[i+5][0]:.2f}]")
                 break
         else:
@@ -108,7 +108,7 @@ while menu != 6:
             if mf > maior_mf:
                 maior_mf = mf
                 aluno_maiormf = cadastro_alunos[i]
-        print(f"\nAluno com maior média final: {aluno_maiormf}, MF: {maior_mf:.2f}")
+        print(f"\nAluno(a) com maior média final: {aluno_maiormf}, MF: {maior_mf:.2f}")
     elif menu == 4:
         menor_mf = 10
         aluno_menormf = ''
@@ -117,7 +117,7 @@ while menu != 6:
             if mf < menor_mf:
                 menor_mf = mf
                 aluno_menormf = cadastro_alunos[i]
-        print(f"\nAluno com menor média final: {aluno_menormf}, MF: {menor_mf:.2f}")
+        print(f"\nAluno(a) com menor média final: {aluno_menormf}, MF: {menor_mf:.2f}")
     elif menu == 5:
             maior_5 = 0
             for i in range(5, len(cadastro_alunos), 6):  
